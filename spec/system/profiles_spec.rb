@@ -44,9 +44,9 @@ RSpec.describe "Profiles", type: :system do
 
         click_link event.user.name
 
-        expect(page).to have_content(event.user.name)
-        expect(page).to have_content(event.user.hobby)
-        expect(page).to have_content(event.user.profile)
+        expect(page).to have_content(user.name)
+        expect(page).to have_content(user.hobby)
+        expect(page).to have_content(user.profile)
       end
     end
 
