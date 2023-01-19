@@ -57,7 +57,7 @@
         <div class="card-body">
           <div class="d-flex align-items-center gap-3 mb-3">
             <%= image_tag @event.user.decorate.avatar, class: 'rounded-circle avatar-lg' %>
-            <%= link_to @event.user.name, user_path %>
+            <%= link_to @event.user.name, user_path, class: 'nav-link' %>
             <ul class="list-unstyled">
              <%= render 'relationships/follow_button', user: @user %>
            </ul>
@@ -116,10 +116,9 @@
         <div class="card-body">
            <ul class="list-unstyled">
              <%= render partial: 'events/attendee', collection: @event.attendees %>
-            </ul>
+           </ul>
         </div>
       </div>
-
       <div class="card">
         <div class="card-header">
           <i class="bi bi-chat"></i>

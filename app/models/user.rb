@@ -49,7 +49,9 @@ class User < ApplicationRecord
 
   def unfollow(other_user)
     relationship = self.relationships.find_by(follow_id: other_user.id)
-    relationship.destroy if relationship
+    if relationship
+      relationship.destroy 
+    end
   end
   
   def owner?(event)
