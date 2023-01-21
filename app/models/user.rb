@@ -52,7 +52,6 @@ class User < ApplicationRecord
     relationship = self.relationships.find_by(follow_id: other_user.id)
     #if文が見にくいので、一文に変更！＝＞こっちの方が見やすい！
     relationship.destroy if relationship
-    end
   end
   
   def owner?(event)
