@@ -1,9 +1,11 @@
-  <% if current_user.following?(user) %>
-    <%= form_with model: relationship, url: relationship_path, method: :delete, local: true do |f| %>
-      <%= f.submit 'Unfollow', class: 'btn btn-danger btn-block' %>
-    <% end %>
-  <% else %>
-    <%= form_with model: @set_relationship, url: relationships_path, local: true do |f| %>
-      <%= f.submit 'Follow', class: 'btn btn-primary btn-block' %>
-    <% end %>
+<% if current_user.following?(user) %>
+  <%#パーシャルファイルにはインスタンス変数は使えない！「@」を省いて、render先にはpartialオプションとlocalsオプションを追加する！%>
+  <%= form_with model: relationship, url: relationship_path, method: :delete, local: true do |f| %>
+    <%= f.submit 'フォローを外す', class: 'btn btn-danger btn-block' %>
   <% end %>
+<% else %>
+  <%#パーシャルファイルにはインスタンス変数は使えない！！！！%>
+  <%= form_with model: set_relationship, url: relationships_path, local: true do |f| %>
+    <%= f.submit 'フォローする', class: 'btn btn-primary btn-block' %>
+  <% end %>
+<% end %>
