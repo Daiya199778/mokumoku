@@ -42,15 +42,16 @@ class User < ApplicationRecord
   end
 
   def follow(other_user)
-    unless self == other_user
+    #早期リターンの指摘があったため、unless文を早期リターンへ書き換える！
+    return if self == other_user
       self.relationships.find_or_create_by(follow_id: other_user.id)
     end
   end
 
   def unfollow(other_user)
     relationship = self.relationships.find_by(follow_id: other_user.id)
-    if relationship
-      relationship.destroy 
+    #if文が見にくいので、一文に変更！＝＞こっちの方が見やすい！
+    relationship.destroy if relationship
     end
   end
   
