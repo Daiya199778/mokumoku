@@ -3,14 +3,6 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
-  has_many :relationships, foreign_key: "user_id", dependent: :destroy
-  has_many :followings, through: :relationships, source: :follow
-
-  has_many :passive_relationships, class_name: "Relationship",
-                                   foreign_key: "follow_id",
-                                   dependent: :destroy
-  has_many :followers, through: :passive_relationships, source: :user
-
   has_many :events, dependent: :destroy
   has_many :event_attendances, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -37,23 +29,6 @@ class User < ApplicationRecord
   scope :allowing_liked_event_notification,
         -> { joins(:notification_timings).merge(NotificationTiming.liked_event) }
 
-  def following?(other_user)
-    self.followings.include?(other_user)
-  end
-
-  def follow(other_user)
-    #早期リターンの指摘があったため、unless文を早期リターンへ書き換える！
-    return if self == other_user
-      self.relationships.find_or_create_by(follow_id: other_user.id)
-    end
-  end
-
-  def unfollow(other_user)
-    relationship = self.relationships.find_by(follow_id: other_user.id)
-    #if文が見にくいので、一文に変更！＝＞こっちの方が見やすい！
-    relationship.destroy if relationship
-  end
-  
   def owner?(event)
     event.user_id == id
   end

@@ -57,10 +57,10 @@
         <div class="card-body">
           <div class="d-flex align-items-center gap-3 mb-3">
             <%= image_tag @event.user.decorate.avatar, class: 'rounded-circle avatar-lg' %>
-            <%= link_to @event.user.name, user_path, class: 'nav-link' %>
+            <%= link_to @event.user.name, user_path(@event.user), class: 'nav-link' %>
             <ul class="list-unstyled">
             <%# パーシャルファイルがローカル変数の場合は「partialオプション」と「localsオプション」を追加すること！%>
-             <%= render partial: 'relationships/follow_button', locals: { relationship: @relationship } %>
+             <%#= render partial: 'relationships/follow_button', locals: { relationship: @relationship } %>
            </ul>
           </div>
           <div class="p-3 bg-light">

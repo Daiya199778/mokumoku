@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 class Mypage::ProfilesController < Mypage::BaseController
   def show
     #ログインしているユーザーが表示される。
